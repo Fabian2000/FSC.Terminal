@@ -41,7 +41,7 @@ namespace FSC
         /// </summary>
         public static void Back()
         {
-            Console.WriteLine("\b \b");
+            Console.Write("\b \b");
         }
 
         /// <summary>

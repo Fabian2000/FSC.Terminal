@@ -105,7 +105,7 @@ namespace FSC
                         password.Remove(password.Length - 1, 1);
                         if (passwordMode == TerminalPasswordMode.HideByChar)
                         {
-                            Back();
+                            Backspace();
                         }
                     }
                 }

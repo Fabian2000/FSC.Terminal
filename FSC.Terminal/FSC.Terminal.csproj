@@ -18,9 +18,15 @@
     <PackageReleaseNotes>First Release</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>False</IncludeSymbols>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageId>FSC-Terminal</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
