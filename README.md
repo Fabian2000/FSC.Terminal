@@ -48,4 +48,4 @@ Username: JohnDoe
 Password: 12345678
 ```
 
-_If you choose a password mode, the password will not be visible_
+_If you choose the right password mode, the password will not be visible_
