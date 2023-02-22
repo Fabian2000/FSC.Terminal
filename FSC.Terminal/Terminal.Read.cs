@@ -144,14 +144,12 @@ namespace FSC
                 if (key.KeyChar.Equals(noChar) && !charLock)
                 {
                     Write(noChar);
-                    WriteLine();
                     ret = false;
                     charLock = true;
                 }
                 else if (key.KeyChar.Equals(yesChar) && !charLock)
                 {
                     Write(yesChar);
-                    WriteLine();
                     ret = true;
                     charLock = true;
                 }
