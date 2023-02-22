@@ -9,13 +9,14 @@
     <Title>FSC-Terminal</Title>
     <Company>Fabian Schlüter</Company>
     <Authors>Fabian Schlüter</Authors>
+	<Version>1.1.0</Version>
     <Description>FSC.Terminal works like the Console class and contains the same or similar methods and properties. It also contains some extra features like password inputs</Description>
     <Copyright>Copyright 2023 by Fabian Schlüter</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Fabian2000/FSC.Terminal</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Fabian2000/FSC.Terminal.git</RepositoryUrl>
     <PackageTags>Console, CMD, Terminal, Bash, Shell, Commandline, FSC</PackageTags>
-    <PackageReleaseNotes>First Release</PackageReleaseNotes>
+    <PackageReleaseNotes>Added ReadYesNo request and ReadSelection for letting the user choose an item out of an array or a list</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>False</IncludeSymbols>
     <PackageIcon>icon.png</PackageIcon>
