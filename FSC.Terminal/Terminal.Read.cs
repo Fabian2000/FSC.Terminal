@@ -122,5 +122,162 @@ namespace FSC
             WriteLine();
             return password.ToString();
         }
+
+        /// <summary>
+        /// Reads if the user agree or not
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="yesChar">The char, that is used to agree</param>
+        /// <param name="noChar">The char, that is used to disagree</param>
+        /// <returns>True, if the user used the yesChar, otherwise False</returns>
+        public static bool ReadYesNo<T>(T displayText, char yesChar, char noChar)
+        {
+            Write(displayText);
+            Write($"[{yesChar}|{noChar}] ");
+            var ret = false;
+            var charLock = false;
+
+            while (true)
+            {
+                var key = ReadKey(true);
+
+                if (key.KeyChar.Equals(noChar) && !charLock)
+                {
+                    Write(noChar);
+                    WriteLine();
+                    ret = false;
+                    charLock = true;
+                }
+                else if (key.KeyChar.Equals(yesChar) && !charLock)
+                {
+                    Write(yesChar);
+                    WriteLine();
+                    ret = true;
+                    charLock = true;
+                }
+                else if (key.Key.Equals(ConsoleKey.Enter) && charLock)
+                {
+                    break;
+                }
+                else if (key.Key.Equals(ConsoleKey.Backspace) && charLock)
+                {
+                    charLock = false;
+                    Backspace();
+                }
+            }
+
+            WriteLine();
+            return ret;
+        }
+
+        /// <summary>
+        /// Reads the selection of an array
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="options">The array of available options</param>
+        /// <returns>The index of the selected item</returns>
+        public static int ReadSelection<T>(T displayText, params string[] options)
+        {
+            return ReadSelection<T>(displayText, options);
+        }
+
+        /// <summary>
+        /// Reads the selection of an array
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="allowCancel">If true, the user can cancel the selection process</param>
+        /// <param name="options">The array of available options</param>
+        /// <returns>The index of the selected item (if canceled: -1)</returns>
+        public static int ReadSelection<T>(T displayText, bool allowCancel, params string[] options)
+        {
+            return ReadSelection<T>(displayText, allowCancel, options);
+        }
+
+        /// <summary>
+        /// Reads the selection of a list
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="options">The list of available options</param>
+        /// <returns>The index of the selected item</returns>
+        public static int ReadSelection<T>(T displayText, List<string> options)
+        {
+            return ReadSelection<T>(displayText, false, options);
+        }
+
+        /// <summary>
+        /// Reads the selection of a list
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="allowCancel">If true, the user can cancel the selection process</param>
+        /// <param name="options">The list of available options</param>
+        /// <returns>The index of the selected item (if canceled: -1)</returns>
+        public static int ReadSelection<T>(T displayText, bool allowCancel = false, List<string> options)
+        {
+            WriteLine(displayText);
+
+            var selection = 0;
+            var minSelection = 0;
+            var maxSelection = options.Count - 1;
+            var maxWord = options.Max(word => word.Length);
+            var emptyChars = Regex.Replace(options.First(word => word.Length == maxWord), ".", " ") + "  ";
+
+            while (true)
+            {
+                for (var i = 0; i < options.Count; i++)
+                {
+                    Write(emptyChars);
+                    CursorLeft = 0;
+
+                    if (i == selection)
+                    {
+                        Write("> ");
+                    }
+                    WriteLine(options[i].ReplaceLineEndings());
+                }
+
+                var key = ReadKey(true);
+
+                if (key.Key.Equals(ConsoleKey.Enter))
+                {
+                    break;
+                }
+                else if (key.Key.Equals(ConsoleKey.Escape) && allowCancel)
+                {
+                    selection = -1;
+                    break;
+                }
+                else if (key.Key.Equals(ConsoleKey.UpArrow))
+                {
+                    if (selection == minSelection)
+                    {
+                        selection = maxSelection + 1;
+                    }
+                    selection--;
+                }
+                else if (key.Key.Equals(ConsoleKey.DownArrow))
+                {
+                    if (selection == maxSelection)
+                    {
+                        selection = minSelection - 1;
+                    }
+                    selection++;
+                }
+
+                SetCursorPosition(0, GetCursorPosition().Top - options.Count);
+            }
+
+            for (var i = options.Count - 1; i >= 0; i--)
+            {
+                Write(emptyChars);
+                CursorLeft = 0;
+                SetCursorPosition(0, GetCursorPosition().Top - 1);
+            }
+            Write(emptyChars);
+            SetCursorPosition(0, GetCursorPosition().Top);
+
+            
+            WriteLine(selection == -1 ? "..." : options[selection]);
+            return selection;
+        }
     }
 }
