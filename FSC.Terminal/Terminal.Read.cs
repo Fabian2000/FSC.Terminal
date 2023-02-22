@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FSC
 {
@@ -167,7 +170,7 @@ namespace FSC
             WriteLine();
             return ret;
         }
-
+#if NET6_0_OR_GREATER
         /// <summary>
         /// Reads the selection of an array
         /// </summary>
@@ -209,7 +212,7 @@ namespace FSC
         /// <param name="allowCancel">If true, the user can cancel the selection process</param>
         /// <param name="options">The list of available options</param>
         /// <returns>The index of the selected item (if canceled: -1)</returns>
-        public static int ReadSelection<T>(T displayText, bool allowCancel = false, List<string> options)
+        public static int ReadSelection<T>(T displayText, bool allowCancel, List<string> options)
         {
             WriteLine(displayText);
 
@@ -277,5 +280,6 @@ namespace FSC
             WriteLine(selection == -1 ? "..." : options[selection]);
             return selection;
         }
+#endif
     }
 }
