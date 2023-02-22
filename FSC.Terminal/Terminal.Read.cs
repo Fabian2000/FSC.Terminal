@@ -178,7 +178,7 @@ namespace FSC
         /// <returns>The index of the selected item</returns>
         public static int ReadSelection<T>(T displayText, params string[] options)
         {
-            return ReadSelection<T>(displayText, options);
+            return ReadSelection<T>(displayText, options.ToList());
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace FSC
         /// <returns>The index of the selected item (if canceled: -1)</returns>
         public static int ReadSelection<T>(T displayText, bool allowCancel, params string[] options)
         {
-            return ReadSelection<T>(displayText, allowCancel, options);
+            return ReadSelection<T>(displayText, allowCancel, options.ToList());
         }
 
         /// <summary>
