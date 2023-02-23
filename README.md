@@ -94,6 +94,33 @@ bool userAgreed = Terminal.ReadYesNo("Do you agree our ToS and privacy policy?",
 ```
 _The user can only input y or N. This can not be canceled with the escape key._
 
+## Example 4
+```cs
+static void Main(string[] args)
+{
+    Terminal.Title = "License Input";
+    while (true)
+    {
+        Terminal.WriteLine("Hello");
+        if (Terminal.ReadLicense("Please enter a license: ", out string value, 4, 4))
+        {
+            Terminal.WriteLine("You entered " + value);
+            break;
+        }
+        else
+        {
+            Terminal.WriteLine("Invalid license ...");
+        }
+    }
+    Terminal.ReadKey(true);
+}
+```
+
+## Output 4
+```cmd
+Hello
+Please enter a license: ____-____-____-____
+```
 
 ## How a program could look like:
 ```cs
