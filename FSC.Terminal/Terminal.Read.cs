@@ -126,6 +126,115 @@ namespace FSC
             return password.ToString();
         }
 
+        #if NET6_0_OR_GREATER
+        /// <summary>
+        /// Reads the next line of characters as a license ____-____-____-____ (AD63-8DT3F-MV8F5-99RS)
+        /// </summary>
+        /// <param name="displayText">Adds a text before the user may input a text</param>
+        /// <param name="license">The license, if input was successful</param>
+        /// <param name="sections">Define, how many sections should exist. Sections are splitted by a hyphen</param>
+        /// <param name="charsPerSection">Defines, how many chars may be in a section</param>
+        /// <returns>True, if the entered license is valid and False if not</returns>
+        public static bool ReadLicense<T>(T displayText, out string license, int sections = 4, int charsPerSection = 4)
+        {
+            license = string.Empty;
+
+            Write(displayText);
+
+            var maxChars = charsPerSection * sections + sections - 1;
+            var chars = new List<char>();
+
+            for (var i = 0; i < sections; i++)
+            {
+                for (var j = 0; j < charsPerSection; j++)
+                {
+                    chars.Add('_');
+                }
+                chars.Add('-');
+            }
+            chars.RemoveAt(chars.Count - 1);
+
+            Write(string.Concat(chars));
+
+            var textLen = displayText?.ToString()?.Length ?? 0;
+            SetCursorPosition(textLen, GetCursorPosition().Top);
+
+            var cursor = GetCursorPosition().Left;
+
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+
+                if (Regex.IsMatch(key.KeyChar.ToString(), "^[A-Za-z0-9]$") && cursor - textLen != chars.Count)
+                {
+                    var c = key.KeyChar.ToString().ToUpper();
+                    Write(c);
+                    chars[cursor - textLen] = c[0];
+
+                    if (chars.Count - 1 > cursor - textLen && chars[cursor - textLen + 1] == '-')
+                    {
+                        Write("-");
+                        cursor++;
+                    }
+
+                    cursor++;
+                }
+                else if (key.Key.Equals(ConsoleKey.Backspace) && cursor - textLen > 0)
+                {
+                    if (chars[cursor - textLen - 1] == '-')
+                    {
+                        cursor--;
+                    }
+                    chars[cursor - textLen - 1] = '_';
+                    SetCursorPosition(--cursor, GetCursorPosition().Top);
+                    Write("_");
+                    SetCursorPosition(cursor, GetCursorPosition().Top);
+                }
+                else if (key.Key.Equals(ConsoleKey.Enter))
+                {
+                    WriteLine();
+                    break;
+                }
+                else if (key.Key.Equals(ConsoleKey.LeftArrow))
+                {
+                    if (cursor > textLen)
+                    {
+                        cursor--;
+
+                        if (chars[cursor - textLen] == '-')
+                        {
+                            cursor--;
+                        }
+
+                        SetCursorPosition(cursor, GetCursorPosition().Top);
+                    }
+                }
+                else if (key.Key.Equals(ConsoleKey.RightArrow))
+                {
+                    if (cursor < textLen + chars.Count - 1)
+                    {
+                        cursor++;
+
+                        if (chars[cursor - textLen] == '-')
+                        {
+                            cursor++;
+                        }
+
+                        SetCursorPosition(cursor, GetCursorPosition().Top);
+                    }
+                }
+            }
+            
+            if (chars.Contains('_'))
+            {
+                return false;
+            }
+
+            license = string.Concat(chars);
+            return true;
+        }
+#endif
+
         /// <summary>
         /// Reads if the user agree or not
         /// </summary>
