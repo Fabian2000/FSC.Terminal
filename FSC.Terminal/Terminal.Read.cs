@@ -130,6 +130,18 @@ namespace FSC
         /// <summary>
         /// Reads the next line of characters as a license ____-____-____-____ (AD63-8DT3F-MV8F5-99RS)
         /// </summary>
+        /// <param name="license">The license, if input was successful</param>
+        /// <param name="sections">Define, how many sections should exist. Sections are splitted by a hyphen</param>
+        /// <param name="charsPerSection">Defines, how many chars may be in a section</param>
+        /// <returns>True, if the entered license is valid and False if not</returns>
+        public static bool ReadLicense(out string license, int sections = 4, int charsPerSection = 4)
+        {
+            return ReadLicense(string.Empty, out license, sections, charsPerSection);
+        }
+
+        /// <summary>
+        /// Reads the next line of characters as a license ____-____-____-____ (AD63-8DT3F-MV8F5-99RS)
+        /// </summary>
         /// <param name="displayText">Adds a text before the user may input a text</param>
         /// <param name="license">The license, if input was successful</param>
         /// <param name="sections">Define, how many sections should exist. Sections are splitted by a hyphen</param>
