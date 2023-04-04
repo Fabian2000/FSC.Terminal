@@ -6,6 +6,13 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            while(!Terminal.ReadLicense(out string license));
+            Terminal.ReadKey();
+        }
+
+
+        /*static void Main(string[] args)
+        {
             Terminal.Title = "Delivery Service - Login";
 
             Terminal.WriteLine("Hello and welcome. What is your name?");
@@ -53,6 +60,6 @@ namespace TestApp
                 Terminal.WriteLine($"Thank you for ordering at <Delivery Service>. Your order #{index}#{foodOfTheDay[index]}# got submitted and will arrive in {(time - DateTime.Now).Minutes + 25} minutes.");
                 Thread.Sleep(60_000);
             }
-        }
+        }*/
     }
 }

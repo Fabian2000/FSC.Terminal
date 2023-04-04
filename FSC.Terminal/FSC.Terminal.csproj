@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/Fabian2000/FSC.Terminal</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Fabian2000/FSC.Terminal.git</RepositoryUrl>
     <PackageTags>Console, CMD, Terminal, Bash, Shell, Commandline, FSC</PackageTags>
-    <PackageReleaseNotes>Added ReadYesNo request and ReadSelection for letting the user choose an item out of an array or a list</PackageReleaseNotes>
+    <PackageReleaseNotes>Added ReadLicense to give the user the possibility to enter a formatted license string</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <IncludeSymbols>False</IncludeSymbols>
     <PackageIcon>icon.png</PackageIcon>
