@@ -9,7 +9,7 @@
     <Title>FSC-Terminal</Title>
     <Company>Fabian Schlüter</Company>
     <Authors>Fabian Schlüter</Authors>
-	<Version>1.3.0</Version>
+	<Version>1.3.1</Version>
     <Description>FSC.Terminal works like the Console class and contains the same or similar methods and properties. It also contains some extra features like password inputs</Description>
     <Copyright>Copyright 2023 by Fabian Schlüter</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>

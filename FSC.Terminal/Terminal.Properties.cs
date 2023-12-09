@@ -264,7 +264,7 @@ namespace FSC
                 Console.Title = value;
 
 #if NET5_0_OR_GREATER
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     Write($"\x1b]2;{value}\x1b\\");
                 }
