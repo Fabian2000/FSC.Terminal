@@ -259,7 +259,17 @@ namespace FSC
                 }
                 catch { throw; }
             }
-            set => Console.Title = value;
+            set
+            {
+                Console.Title = value;
+
+#if NET5_0_OR_GREATER
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Write($"\x1b]2;{value}\x1b\\");
+                }
+#endif
+            }
         }
 
         /// <summary>

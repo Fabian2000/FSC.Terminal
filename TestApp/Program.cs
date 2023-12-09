@@ -6,7 +6,8 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            while(!Terminal.ReadLicense(out string license));
+            Terminal.Title = "Showing Image as ASCII";
+            Terminal.WritePicture(ImageHelper.LoadImage("./hallo_example.png"), 100, 38);
             Terminal.ReadKey();
         }
 
